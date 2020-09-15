@@ -56,7 +56,7 @@ function showProducts() {
       />
       <div class="card__info">
         <p class="card__info__text">${products[i].name}
-        <span class="display--block font-size--1">${products[i].price}</span>
+          <span class="display--block font-size--1">${products[i].price}</span>
         </p>
         <button class="button">Adicionar ao Carrinho</button>
       </div>

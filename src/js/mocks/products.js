@@ -1,4 +1,3 @@
-const productListElement = document.querySelector(".product-list");
 const products = [
   {
     id: 1,
@@ -44,29 +43,8 @@ const products = [
   },
 ];
 
-function showProducts() {
-  let htmlStructure = "";
+const getProducts = () => {
+  return [...products];
+};
 
-  for (let i = 0; i <= products.length - 1; i++) {
-    const structure = `<li class="card">
-      <img
-        class="card__image"
-        src="${products[i].imageSrc}"
-        alt="Imagem ${products[i].name}"
-      />
-      <div class="card__info">
-        <p class="card__info__text">${products[i].name}
-          <span class="display--block font-size--1">${products[i].price}</span>
-        </p>
-        <button class="button">Adicionar ao Carrinho</button>
-      </div>
-    </li>
-    `;
-
-    htmlStructure += structure;
-  }
-
-  productListElement.innerHTML += htmlStructure;
-}
-
-showProducts();
+export { getProducts };

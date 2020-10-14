@@ -1,9 +1,14 @@
 import { getProducts } from "../mocks/products.js";
+import { setListener } from "../utils/dom.js";
 
 class Main {
   constructor(){
     this.products = [];
-    this.renderElement = document.querySelector('#product-list');
+    this.filters = {
+      category: 'all',
+      search: '',
+    };
+    this.renderElement = this.getRenderElement();
 
     this.init();
   }
@@ -17,42 +22,57 @@ class Main {
     this.renderProducts(this.products);
   }
 
-  setCategoryFieldListener() {
-    const categoryField = document.querySelector('#category-field');
+  getRenderElement(){
+    return document.querySelector('#product-list');
+  }
 
-    categoryField.addEventListener('change', this.handleCategoryFilter.bind(this));
+  setCategoryFieldListener() {
+    setListener('#category-field', 'change', this.handleCategoryFilter.bind(this));
   }
 
   handleCategoryFilter(event){
-    const selectedCategory = event.target.value;
+    this.filters.category = event.target.value;
 
-      if (selectedCategory === 'all') {
-        this.renderProducts(this.products);
+    this.applyFilters();
+  }
 
-        return;
-      }
+  filterByCategory(products){
+    if (this.filters.category === 'all') {
 
-      let filteredProducts = this.products.filter((product) => {
-          return product.category === selectedCategory;
-      });
+      return products;
+    }
 
-      this.renderProducts(filteredProducts);
+    return products.filter((product) => {
+        return product.category === this.filters.category;
+    });
   }
 
   setSearchFieldListener(){
-    const searchField = document.querySelector('#search-field');
-
-    searchField.addEventListener('input', this.handleSearchFilter.bind(this));
+    setListener('#search-field', 'input', this.handleSearchFilter.bind(this));
   }
 
-  handleSearchFilter(){
-    const searchText = event.target.value;
+  handleSearchFilter(event){
+    const search = event.target.value.trim();
+    const searchLength = search.length;
 
-    let filteredProducts = this.products.filter(products => {
-      return products.name.toLowerCase().includes(searchText.toLowerCase());
+    if (searchLength === 0 || searchLength > 2) {
+      this.filters.search = search;
+
+      this.applyFilters();
+    }
+  }
+
+  filterBySearch(products){
+    return products.filter(products => {
+      return products.name.toLowerCase().includes(this.filters.search.toLowerCase());
     })
+  }
 
-    this.renderProducts(filteredProducts);
+  applyFilters(){
+    const filteredProducts = this.filterByCategory(this.products);
+    const searchedProduts = this.filterBySearch(filteredProducts);
+
+    this.renderProducts(searchedProduts);
   }
 
   renderProducts(products) {
@@ -66,7 +86,7 @@ class Main {
           />
 
           <div class="card__info">
-            <p class="card_info_text">${products.name}
+            <p class="card__info__text">${products.name}
               <span class="display--block font-size--1">${products.price}</span>
             </p>
 

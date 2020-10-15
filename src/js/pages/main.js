@@ -1,5 +1,6 @@
 import { getProducts } from "../mocks/products.js";
 import { setListener } from "../utils/dom.js";
+import { formatToBRL } from "../utils/currency.js"
 
 class Main {
   constructor(){
@@ -36,15 +37,13 @@ class Main {
     this.applyFilters();
   }
 
-  filterByCategory(products){
+  filterByCategory(product){
     if (this.filters.category === 'all') {
 
-      return products;
+      return true;
     }
 
-    return products.filter((product) => {
-        return product.category === this.filters.category;
-    });
+    return product.category === this.filters.category;
   }
 
   setSearchFieldListener(){
@@ -62,17 +61,20 @@ class Main {
     }
   }
 
-  filterBySearch(products){
-    return products.filter(products => {
-      return products.name.toLowerCase().includes(this.filters.search.toLowerCase());
-    })
+  filterBySearch(product){
+
+    return product.name
+    .toLowerCase()
+    .includes(this.filters.search
+    .toLowerCase());
   }
 
   applyFilters(){
-    const filteredProducts = this.filterByCategory(this.products);
-    const searchedProduts = this.filterBySearch(filteredProducts);
+    const filteredProducts = this.products
+    .filter(this.filterByCategory.bind(this))
+    .filter(this.filterBySearch.bind(this));
 
-    this.renderProducts(searchedProduts);
+    this.renderProducts(filteredProducts);
   }
 
   renderProducts(products) {
@@ -87,7 +89,7 @@ class Main {
 
           <div class="card__info">
             <p class="card__info__text">${products.name}
-              <span class="display--block font-size--1">${products.price}</span>
+              <span class="display--block font-size--1">${formatToBRL(products.price)}</span>
             </p>
 
             <button class="button">Adicionar ao Carrinho</button>

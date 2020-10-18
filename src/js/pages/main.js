@@ -8,6 +8,7 @@ class Main {
     this.filters = {
       category: 'all',
       search: '',
+      price: 'asc',
     };
     this.renderElement = this.getRenderElement();
 
@@ -15,16 +16,27 @@ class Main {
   }
 
   init() {
+    this.setPriceFieldListener();
     this.setCategoryFieldListener();
     this.setSearchFieldListener();
 
     this.products = getProducts();
 
-    this.renderProducts(this.products);
+    this.renderProducts(this.products.sort(this.orderProductByPrice.bind(this)));
   }
 
   getRenderElement(){
     return document.querySelector('#product-list');
+  }
+
+  setPriceFieldListener(){
+    setListener('#sort-field', 'change', this.handlePriceFilter.bind(this));
+  }
+
+  handlePriceFilter(event){
+    this.filters.price = event.target.value;
+
+    this.applyFilters();
   }
 
   setCategoryFieldListener() {
@@ -69,10 +81,18 @@ class Main {
     .toLowerCase());
   }
 
+  orderProductByPrice(firstProduct, secondProduct) {
+    if (this.filters.price === 'asc') {
+      return firstProduct.price - secondProduct.price;
+    }
+    return secondProduct.price - firstProduct.price;
+  }
+
   applyFilters(){
     const filteredProducts = this.products
     .filter(this.filterByCategory.bind(this))
-    .filter(this.filterBySearch.bind(this));
+    .filter(this.filterBySearch.bind(this))
+    .sort(this.orderProductByPrice.bind(this));
 
     this.renderProducts(filteredProducts);
   }
@@ -99,5 +119,6 @@ class Main {
     }, '');
   }
 }
+
 
 new Main();

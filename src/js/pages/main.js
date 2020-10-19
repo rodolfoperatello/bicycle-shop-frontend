@@ -51,7 +51,6 @@ class Main {
 
   filterByCategory(product) {
     if (this.filters.category === 'all') {
-
       return true;
     }
 

@@ -49,7 +49,7 @@ class Main {
     this.applyFilters();
   }
 
-  filterByCategory(product){
+  filterByCategory(product) {
     if (this.filters.category === 'all') {
 
       return true;
@@ -58,11 +58,11 @@ class Main {
     return product.category === this.filters.category;
   }
 
-  setSearchFieldListener(){
+  setSearchFieldListener() {
     setListener('#search-field', 'input', this.handleSearchFilter.bind(this));
   }
 
-  handleSearchFilter(event){
+  handleSearchFilter(event) {
     const search = event.target.value.trim();
     const searchLength = search.length;
 
@@ -73,7 +73,7 @@ class Main {
     }
   }
 
-  filterBySearch(product){
+  filterBySearch(product) {
     return product.name
       .toLowerCase()
       .includes(this.filters.search.toLowerCase());
@@ -87,7 +87,7 @@ class Main {
     return secondProduct.price - firstProduct.price;
   }
 
-  applyFilters(){
+  applyFilters() {
     const filteredProducts = this.products
       .filter(this.filterByCategory.bind(this))
       .filter(this.filterBySearch.bind(this))

@@ -25,15 +25,15 @@ class Main {
     this.renderProducts(this.products.sort(this.orderProductByPrice.bind(this)));
   }
 
-  getRenderElement(){
+  getRenderElement() {
     return document.querySelector('#product-list');
   }
 
-  setPriceFieldListener(){
+  setPriceFieldListener() {
     setListener('#sort-field', 'change', this.handlePriceFilter.bind(this));
   }
 
-  handlePriceFilter(event){
+  handlePriceFilter(event) {
     this.filters.price = event.target.value;
 
     this.applyFilters();

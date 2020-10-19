@@ -22,7 +22,7 @@ class Main {
 
     this.products = getProducts();
 
-    this.renderProducts(this.products.sort(this.orderProductByPrice.bind(this)));
+    this.renderProducts(this.products.sort(this.sortByPrice.bind(this)));
   }
 
   getRenderElement() {
@@ -79,11 +79,11 @@ class Main {
       .includes(this.filters.search.toLowerCase());
   }
 
-  orderProductByPrice(firstProduct, secondProduct) {
+  sortByPrice(firstProduct, secondProduct) {
     if (this.filters.price === 'asc') {
       return firstProduct.price - secondProduct.price;
     }
-    
+
     return secondProduct.price - firstProduct.price;
   }
 
@@ -91,7 +91,7 @@ class Main {
     const filteredProducts = this.products
       .filter(this.filterByCategory.bind(this))
       .filter(this.filterBySearch.bind(this))
-      .sort(this.orderProductByPrice.bind(this));
+      .sort(this.sortByPrice.bind(this));
 
     this.renderProducts(filteredProducts);
   }

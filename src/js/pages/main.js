@@ -74,7 +74,6 @@ class Main {
   }
 
   filterBySearch(product){
-
     return product.name
     .toLowerCase()
     .includes(this.filters.search

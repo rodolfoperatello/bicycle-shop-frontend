@@ -91,7 +91,7 @@ class Main {
     const filteredProducts = this.products
     .filter(this.filterByCategory.bind(this))
     .filter(this.filterBySearch.bind(this))
-    .sort(this.orderProductByPrice.bind(this));
+    .sort(this.sortByPrice.bind(this));
 
     this.renderProducts(filteredProducts);
   }

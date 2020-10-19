@@ -84,6 +84,7 @@ class Main {
     if (this.filters.price === 'asc') {
       return firstProduct.price - secondProduct.price;
     }
+    
     return secondProduct.price - firstProduct.price;
   }
 

@@ -32,16 +32,17 @@
 
     <main class="wrapper">
       <div class="filters">
-        <input class="input" type="search" placeholder="Buscar produto" />
+        <input id="search-field" class="input" type="search" placeholder="Buscar produto" />
 
-        <select class="input">
+        <select id="category-field" class="input">
           <option value="all" selected>Todas as categorias</option>
           <option value="bike">Bicicletas</option>
+          <option value="equipment">Equipamentos</option>
         </select>
 
-        <select class="input">
-          <option value="lowest-price" selected>Menor preço</option>
-          <option value="biggest-price">Maior preço</option>
+        <select id="sort-field" class="input">
+          <option value="asc" selected>Menor preço</option>
+          <option value="desc">Maior preço</option>
         </select>
       </div>
 
@@ -49,5 +50,9 @@
     </main>
   </body>
 
+<<<<<<< HEAD
   <script type="module" src="./js/index.js"></script>
+=======
+  <script type="module" src="./js/pages/main.js"></script>
+>>>>>>> 64a148b9f2b88206afdad52c342bdbd87e85491e
 </html>

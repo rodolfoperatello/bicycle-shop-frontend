@@ -25,15 +25,15 @@ class Main {
     this.renderProducts(this.products.sort(this.orderProductByPrice.bind(this)));
   }
 
-  getRenderElement(){
+  getRenderElement() {
     return document.querySelector('#product-list');
   }
 
-  setPriceFieldListener(){
+  setPriceFieldListener() {
     setListener('#sort-field', 'change', this.handlePriceFilter.bind(this));
   }
 
-  handlePriceFilter(event){
+  handlePriceFilter(event) {
     this.filters.price = event.target.value;
 
     this.applyFilters();
@@ -74,17 +74,16 @@ class Main {
   }
 
   filterBySearch(product){
-
     return product.name
-    .toLowerCase()
-    .includes(this.filters.search
-    .toLowerCase());
+      .toLowerCase()
+      .includes(this.filters.search.toLowerCase());
   }
 
   orderProductByPrice(firstProduct, secondProduct) {
     if (this.filters.price === 'asc') {
       return firstProduct.price - secondProduct.price;
     }
+    
     return secondProduct.price - firstProduct.price;
   }
 

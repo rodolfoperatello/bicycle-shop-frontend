@@ -22,7 +22,7 @@ class Main {
 
     this.products = getProducts();
 
-    this.renderProducts(this.products.sort(this.sortByPrice.bind(this)));
+    this.renderProducts(this.products);
   }
 
   getRenderElement() {

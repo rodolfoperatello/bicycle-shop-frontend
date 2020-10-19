@@ -3,7 +3,7 @@ import { setListener } from "../utils/dom.js";
 import { formatToBRL } from "../utils/currency.js"
 
 class Main {
-  constructor(){
+  constructor() {
     this.products = [];
     this.filters = {
       category: 'all',
@@ -43,7 +43,7 @@ class Main {
     setListener('#category-field', 'change', this.handleCategoryFilter.bind(this));
   }
 
-  handleCategoryFilter(event){
+  handleCategoryFilter(event) {
     this.filters.category = event.target.value;
 
     this.applyFilters();

@@ -75,9 +75,8 @@ class Main {
 
   filterBySearch(product){
     return product.name
-    .toLowerCase()
-    .includes(this.filters.search
-    .toLowerCase());
+      .toLowerCase()
+      .includes(this.filters.search.toLowerCase());
   }
 
   orderProductByPrice(firstProduct, secondProduct) {
